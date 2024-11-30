@@ -27,15 +27,15 @@ Installation Instructions
 
     Clone the repository:
 
-git clone https://github.com/yourusername/weather-navigation-app.git
+git clone https://github.com/charsey/SkyCast.git
 cd weather-navigation-app
 
 Set up environment variables:
 
     Create a .env file in the root directory and add your API keys as follows:
 
-        OPENWEATHER_API_KEY=your_openweathermap_api_key_here
-        GOOGLE_API_KEY=your_google_maps_api_key_here
+        OPENWEATHER_API_KEY=http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png
+        GOOGLE_API_KEY=https://maps.googleapis.com/maps/api/js?key=AIzaSyAaKIfZZOAmH5jo8IRf5Sf1q7qNmX1XwR8&libraries=places
 
         You can obtain your OpenWeatherMap API key by signing up here and your Google Maps API key here.
 
@@ -51,13 +51,13 @@ The application is deployed on two web servers with a load balancer for better s
 1. Web Servers Deployment
 
     The app is deployed on the following servers:
-        Web01: http://54.90.179.62:3000/
-        Web02: http://18.214.99.45:3000/
+        Web01: http://54.221.165.253:3000
+        Web02: http://54.90.134.12:3000
 
 2. Load Balancer Configuration
 
     A load balancer (Lb01) is set up to distribute traffic evenly between the two web servers.
-    Load Balancer URL: http://your-load-balancer-url
+    Load Balancer URL: 	52.201.67.1:3000
 
 Steps to configure the load balancer:
 
@@ -103,7 +103,7 @@ A demo video is available showcasing the following:
     How to view maps and navigate around a destination.
     How to access the application through the load balancer.
 
-Demo Video Link: [Your Demo Video Link]
+Demo Video Link: (https://www.loom.com/share/6626fcfa94ea481897cf200fda4c4112)
 Challenges Faced
 
     Handling API Rate Limits:
