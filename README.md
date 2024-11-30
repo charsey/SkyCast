@@ -1,66 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Weather and Navigation Application
+Overview
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This Skycast and Navigation Application fetches and displays weather information for any searched city using the OpenWeatherMap API. It also integrates Google Maps to provide navigation support and nearby places of interest such as restaurants and hotels. The app is designed to cater to travelers by offering essential information and tools for their journey.
+Features
 
-## About Laravel
+    Displays current weather information for any searched city.
+    Provides a detailed map of the destination using Google Maps.
+    Highlights nearby places such as restaurants, hotels, and attractions.
+    Allows users to navigate and explore their destination with ease.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+APIs Used
+OpenWeatherMap API
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    Base URL: https://api.openweathermap.org/data/2.5
+        Endpoints Used:
+            GET /weather - Fetches current weather for a specific city.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Google Maps API
 
-## Learning Laravel
+    Base URL: Google Maps JavaScript API
+        Features Used:
+            Geocoding to display a map of the searched city.
+            Places API to list nearby restaurants, hotels, and attractions.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Installation Instructions
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    Clone the repository:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+git clone https://github.com/yourusername/weather-navigation-app.git
+cd weather-navigation-app
 
-## Laravel Sponsors
+Set up environment variables:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    Create a .env file in the root directory and add your API keys as follows:
 
-### Premium Partners
+        OPENWEATHER_API_KEY=your_openweathermap_api_key_here
+        GOOGLE_API_KEY=your_google_maps_api_key_here
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+        You can obtain your OpenWeatherMap API key by signing up here and your Google Maps API key here.
 
-## Contributing
+    Install dependencies:
+        The application runs purely on HTML, CSS, and JavaScript, so no additional dependencies are needed.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    Run the application locally:
+        Open the index.html file in your browser to start the app.
 
-## Code of Conduct
+Deployment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The application is deployed on two web servers with a load balancer for better scalability and performance.
+1. Web Servers Deployment
 
-## Security Vulnerabilities
+    The app is deployed on the following servers:
+        Web01: http://54.90.179.62:3000/
+        Web02: http://18.214.99.45:3000/
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. Load Balancer Configuration
 
-## License
+    A load balancer (Lb01) is set up to distribute traffic evenly between the two web servers.
+    Load Balancer URL: http://your-load-balancer-url
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Steps to configure the load balancer:
+
+    Set up the load balancer to forward requests to Web01 and Web02.
+    Use the round-robin algorithm to ensure even distribution of traffic.
+
+How the Application Works
+1. Fetching Weather Data
+
+    When a user searches for a city, the app fetches the current weather data using the /weather endpoint:
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=metric`;
+
+    The app displays the temperature, weather condition, humidity, and wind speed.
+
+2. City Map
+
+    The app uses Google Maps to display a detailed map of the destination city.
+    The map is centered on the location retrieved via Google Maps' Geocoding service.
+
+3. Nearby Places
+
+    Nearby restaurants, hotels, and attractions are fetched using Google Places API and displayed in a list format:
+
+    const request = {
+        location: destinationLocation,
+        radius: 5000,
+        type: ["restaurant", "lodging"],
+    };
+    service.nearbySearch(request, handlePlaces);
+
+How to Access the Application
+
+    Web Server 1: http://54.221.165.253:3000
+    Web Server 2: http://54.90.134.12:3000
+    Load Balancer: http://52.201.67.1:3000
+
+Demo Video
+
+A demo video is available showcasing the following:
+
+    How to search for weather information.
+    How to view maps and navigate around a destination.
+    How to access the application through the load balancer.
+
+Demo Video Link: [Your Demo Video Link]
+Challenges Faced
+
+    Handling API Rate Limits:
+        Both OpenWeatherMap and Google Maps APIs have rate limits, requiring efficient management of requests.
+
+    Map Integration:
+        Displaying dynamic maps and ensuring accurate geolocation required careful configuration of the Google Maps API.
+
+    Server Deployment:
+        Configuring the load balancer to seamlessly distribute traffic between the two servers was a key challenge.
